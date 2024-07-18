@@ -4,49 +4,56 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
 
-namespace YourNamespace
+namespace FitnessTracker
+
 {
-    public partial class MetricEntry : Window
+    public partial class MetricEntry : Page
     {
         private dynamic metrics;
 
-        public MetricEntry()
+        public MetricEntry(FitnessTrackerModel model)
         {
             InitializeComponent();
 
-            // Load metrics from Metrics.json
-            string json = File.ReadAllText("Metrics.json");
-            metrics = JsonConvert.DeserializeObject<dynamic>(json);
+            // // Load metrics from Metrics.json
+            // string json = File.ReadAllText("Metrics.json");
+            // metrics = JsonConvert.DeserializeObject<dynamic>(json);
 
-            // Populate combo box with metric keys
-            foreach (string key in metrics.Keys)
-            {
-               _metricComboBox.Items.Add(key);
-            }
+            // // Populate combo box with metric keys
+            // foreach (string key in metrics.Keys)
+            // {
+            //    _metricComboBox.Items.Add(key);
+            // }
         }
 
-        private void _metricComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cmbExercise_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Clear existing input boxes
-            _inputGrid.Children.Clear();
+            string selectedExercise = (cmbExercise.SelectedItem as ComboBoxItem).Content.ToString();
 
-            // Get selected metric
-            string selectedMetric = _metricComboBox.SelectedItem as string;
+            walkingPanel.Visibility = Visibility.Collapsed;
+            swimmingPanel.Visibility = Visibility.Collapsed;
+            squatsPanel.Visibility = Visibility.Collapsed;
 
-            // Create input boxes for each metric
-            foreach (string property in metrics[selectedMetric].Properties())
+            switch (selectedExercise)
             {
-                TextBox textBox = new TextBox();
-                textBox.Margin = new Thickness(5);
-                textBox.Label = property.Name;
-                _inputGrid.Children.Add(textBox);
+                case "Walking":
+                    walkingPanel.Visibility = Visibility.Visible;
+                    break;
+                case "Swimming":
+                    swimmingPanel.Visibility = Visibility.Visible;
+                    break;
+                case "Squats":
+                    squatsPanel.Visibility = Visibility.Visible;
+                    break;
+                default:
+                    break;
             }
         }
 
-        private void _submitButton_Click(object sender, RoutedEventArgs e)
+        private void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
             // Navigate to Progress.xaml page
-            Progress progressPage = new Progress();
+            Progress<int> progressPage = new Progress<int>();
             this.NavigationService.Navigate(progressPage);
         }
     }

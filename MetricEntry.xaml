@@ -1,7 +1,9 @@
-<Window x:Class="FitnessTracker.MetricEntry"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Metric Selector" Height="350" Width="525">
+<Page x:Class="FitnessTracker.MetricEntry"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Metric Selector"
+      Height="350"
+      Width="525">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -12,13 +14,45 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <ComboBox x:Name="_metricComboBox" Grid.Column="0" Grid.Row="0" Margin="5" 
-                  ItemsSource="{Binding Metrics}" DisplayMemberPath="Name" SelectionChanged="MetricComboBox_SelectionChanged"/>
+        <ComboBox x:Name="cmbExercise"
+                  SelectionChanged="cmbExercise_SelectionChanged">
+            <ComboBoxItem Content="Walking"/>
+            <ComboBoxItem Content="Swimming"/>
+            <ComboBoxItem Content="Squats"/>
+            <ComboBoxItem Content="Other"/>
+        </ComboBox>
 
-        <StackPanel x:Name="_metricFieldsPanel" Grid.Column="0" Grid.Row="1" Margin="5">
-            <!-- This will be populated dynamically based on the selected metric -->
+        <StackPanel x:Name="walkingPanel"
+                    Visibility="Collapsed">
+            <Label Content="Steps taken"
+                   Target="{Binding ElementName=stepsTaken}"/>
+            <TextBox x:Name="stepsTaken"/>
+            <Label Content="Distance walked"
+                   Target="{Binding ElementName=distanceWalked}"/>
+            <TextBox x:Name="distanceWalked"/>
         </StackPanel>
 
-        <Button x:Name="_submitButton" Grid.Column="1" Grid.Row="1" Margin="5" Content="Submit" Click="SubmitButton_Click"/>
+        <StackPanel x:Name="swimmingPanel"
+                    Visibility="Collapsed">
+            <TextBox x:Name="txtLaps"/>
+            <TextBox x:Name="txtTimeTaken"/>
+        </StackPanel>
+
+        <StackPanel x:Name="squatsPanel"
+                    Visibility="Collapsed">
+            <Label Content="Number of reps"
+                   Target="{Binding ElementName=textReps}"/>
+            <TextBox x:Name="txtReps"/>
+            <TextBox
+                x:Name="txtSquatsPerRep"/>
+            <TextBox x:Name="txtTotalTime"/>
+        </StackPanel>
+
+        <Button x:Name="_submitButton"
+                Grid.Column="1"
+                Grid.Row="1"
+                Margin="5"
+                Content="Submit"
+                Click="SubmitButton_Click"/>
     </Grid>
-</Window>
+</Page>
