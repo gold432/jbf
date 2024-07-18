@@ -1,0 +1,31 @@
+{
+  "Walking": [
+    "steps",
+    "distance",
+    "time taken"
+  ],
+  "Swimming": [
+    "laps",
+    "time taken",
+    "avg HR"
+  ],
+  "Running": [
+    "distance",
+    "speed",
+    "calories"
+  ],
+  "Sit-Ups": [
+    "time taken",
+    "sit-ups"
+  ],
+  "Jumping-Jacks": [
+    "duration",
+    "jumps",
+    "calories"
+  ],
+  "Press-Ups": [
+    "routes",
+    "time taken",
+    "press-ups"
+  ]
+}
