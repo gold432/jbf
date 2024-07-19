@@ -99,26 +99,35 @@ namespace FitnessTracker
                     break;
             }
 
-            double m1
-            double m2
-            double m3
+            double m1;
+            double m2;
+            double m3;
 
-            if (double.TryParse(m1TextBox.Text, out double result)) {
-                m1 = result
-            } else {
-                MessageBox.Show("The first metric is not, but must be, a number")
+            if (double.TryParse(m1TextBox.Text, out double result))
+            {
+                m1 = result;
+            }
+            else
+            {
+                MessageBox.Show("The first metric is not, but must be, a number");
             }
 
-            if (double.TryParse(m2TextBox.Text, out double result)) {
-                m2 = result
-            } else {
-                MessageBox.Show("The second metric is not, but must be, a number")
+            if (double.TryParse(m2TextBox.Text, out double result))
+            {
+                m2 = result;
+            }
+            else
+            {
+                MessageBox.Show("The second metric is not, but must be, a number");
             }
 
-            if (double.TryParse(m3TextBox.Text, out double result)) {
-                m1 = result
-            } else {
-                MessageBox.Show("The third metric is not, but must be, a number")
+            if (double.TryParse(m3TextBox.Text, out double result))
+            {
+                m3 = result;
+            }
+            else
+            {
+                MessageBox.Show("The third metric is not, but must be, a number");
             }
 
             _model.RecordActivity(selectedExercise, m1TextBox, m2TextBox, m3TextBox); //TODO
