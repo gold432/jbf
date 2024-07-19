@@ -1,58 +1,134 @@
 <Page x:Class="FitnessTracker.MetricEntry"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      Title="Metric Selector"
-      Height="350"
-      Width="525">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+      Title="Metric Selector">
+       <Grid Margin="10">
+              <Grid.RowDefinitions>
+                     <RowDefinition Height="Auto"/>
+                     <RowDefinition Height="Auto"/>
+                     <RowDefinition Height="Auto"/>
+                     <RowDefinition Height="Auto"/>
+              </Grid.RowDefinitions>
 
-        <ComboBox x:Name="cmbExercise"
-                  SelectionChanged="cmbExercise_SelectionChanged">
-            <ComboBoxItem Content="Walking"/>
-            <ComboBoxItem Content="Swimming"/>
-            <ComboBoxItem Content="Squats"/>
-            <ComboBoxItem Content="Other"/>
-        </ComboBox>
+              <TextBlock Grid.Row="0"
+                         Text="Select a workout"
+                         FontSize="18"
+                         FontWeight="Bold"
+                         Margin="0,0,0,10"/>
 
-        <StackPanel x:Name="walkingPanel"
-                    Visibility="Collapsed">
-            <Label Content="Steps taken"
-                   Target="{Binding ElementName=stepsTaken}"/>
-            <TextBox x:Name="stepsTaken"/>
-            <Label Content="Distance walked"
-                   Target="{Binding ElementName=distanceWalked}"/>
-            <TextBox x:Name="distanceWalked"/>
-        </StackPanel>
+              <ComboBox x:Name="cmbExercise"
+                        Grid.Row="0"
+                        Margin="0,0,0,10"
+                        SelectionChanged="cmbExercise_SelectionChanged">
+                     <ComboBoxItem Content="Walking"/>
+                     <ComboBoxItem Content="Swimming"/>
+                     <ComboBoxItem Content="Running"/>
+                     <ComboBoxItem Content="Sit-Ups"/>
+                     <ComboBoxItem Content="Jumping-Jacks"/>
+                     <ComboBoxItem Content="Press-Ups"/>
+              </ComboBox>
 
-        <StackPanel x:Name="swimmingPanel"
-                    Visibility="Collapsed">
-            <TextBox x:Name="txtLaps"/>
-            <TextBox x:Name="txtTimeTaken"/>
-        </StackPanel>
+              <ScrollViewer Grid.Row="1"
+                            VerticalScrollBarVisibility="Auto">
+                     <StackPanel x:Name="metricPanel">
+                            <StackPanel x:Name="walkingPanel"
+                                        Visibility="Collapsed">
+                                   <Label Content="Steps"
+                                          Target="{Binding ElementName=walkingSteps}"/>
+                                   <TextBox x:Name="walkingSteps"
+                                            Margin="0,0,0,10"/>
+                                   <Label Content="Distance"
+                                          Target="{Binding ElementName=walkingDistance}"/>
+                                   <TextBox x:Name="walkingDistance"
+                                            Margin="0,0,0,10"/>
+                                   <Label Content="Time taken"
+                                          Target="{Binding ElementName=walkingTime}"/>
+                                   <TextBox x:Name="walkingTime"
+                                            Margin="0,0,0,10"/>
+                            </StackPanel>
 
-        <StackPanel x:Name="squatsPanel"
-                    Visibility="Collapsed">
-            <Label Content="Number of reps"
-                   Target="{Binding ElementName=textReps}"/>
-            <TextBox x:Name="txtReps"/>
-            <TextBox
-                x:Name="txtSquatsPerRep"/>
-            <TextBox x:Name="txtTotalTime"/>
-        </StackPanel>
+                            <StackPanel x:Name="swimmingPanel"
+                                        Visibility="Collapsed">
+                                   <Label Content="Laps"
+                                          Target="{Binding ElementName=swimmingLaps}"/>
+                                   <TextBox x:Name="swimmingLaps"
+                                            Margin="0,0,0,10"/>
+                                   <Label Content="Time taken"
+                                          Target="{Binding ElementName=swimmingTime}"/>
+                                   <TextBox x:Name="swimmingTime"
+                                            Margin="0,0,0,10"/>
+                                   <Label Content="Average Heart Rate"
+                                          Target="{Binding ElementName=swimmingAvgHR}"/>
+                                   <TextBox x:Name="swimmingAvgHR"
+                                            Margin="0,0,0,10"/>
+                            </StackPanel>
 
-        <Button x:Name="_submitButton"
-                Grid.Column="1"
-                Grid.Row="1"
-                Margin="5"
-                Content="Submit"
-                Click="SubmitButton_Click"/>
-    </Grid>
+                            <StackPanel x:Name="runningPanel"
+                                        Visibility="Collapsed">
+                                   <Label Content="Distance"
+                                          Target="{Binding ElementName=runningDistance}"/>
+                                   <TextBox x:Name="runningDistance"
+                                            Margin="0,0,0,10"/>
+                                   <Label Content="Speed"
+                                          Target="{Binding ElementName=runningSpeed}"/>
+                                   <TextBox x:Name="runningSpeed"
+                                            Margin="0,0,0,10"/>
+                                   <Label Content="Calories"
+                                          Target="{Binding ElementName=runningCalories}"/>
+                                   <TextBox x:Name="runningCalories"
+                                            Margin="0,0,0,10"/>
+                            </StackPanel>
+
+                            <StackPanel x:Name="sitUpsPanel"
+                                        Visibility="Collapsed">
+                                   <Label Content="Time taken"
+                                          Target="{Binding ElementName=sitUpsTime}"/>
+                                   <TextBox x:Name="sitUpsTime"
+                                            Margin="0,0,0,10"/>
+                                   <Label Content="Sit-Ups"
+                                          Target="{Binding ElementName=sitUpsCount}"/>
+                                   <TextBox x:Name="sitUpsCount"
+                                            Margin="0,0,0,10"/>
+                            </StackPanel>
+
+                            <StackPanel x:Name="jumpingJacksPanel"
+                                        Visibility="Collapsed">
+                                   <Label Content="Duration"
+                                          Target="{Binding ElementName=jumpingJacksDuration}"/>
+                                   <TextBox x:Name="jumpingJacksDuration"
+                                            Margin="0,0,0,10"/>
+                                   <Label Content="Jumps"
+                                          Target="{Binding ElementName=jumpingJacksJumps}"/>
+                                   <TextBox x:Name="jumpingJacksJumps"
+                                            Margin="0,0,0,10"/>
+                                   <Label Content="Calories"
+                                          Target="{Binding ElementName=jumpingJacksCalories}"/>
+                                   <TextBox x:Name="jumpingJacksCalories"
+                                            Margin="0,0,0,10"/>
+                            </StackPanel>
+
+                            <StackPanel x:Name="pressUpsPanel"
+                                        Visibility="Collapsed">
+                                   <Label Content="Routes"
+                                          Target="{Binding ElementName=pressUpsRoutes}"/>
+                                   <TextBox x:Name="pressUpsRoutes"
+                                            Margin="0,0,0,10"/>
+                                   <Label Content="Time taken"
+                                          Target="{Binding ElementName=pressUpsTime}"/>
+                                   <TextBox x:Name="pressUpsTime"
+                                            Margin="0,0,0,10"/>
+                                   <Label Content="Press-Ups"
+                                          Target="{Binding ElementName=pressUpsCount}"/>
+                                   <TextBox x:Name="pressUpsCount"
+                                            Margin="0,0,0,10"/>
+                            </StackPanel>
+                     </StackPanel>
+              </ScrollViewer>
+
+              <Button x:Name="_submitButton"
+                      Grid.Row="2"
+                      Margin="0,10,0,0"
+                      Content="Submit"
+                      Click="SubmitButton_Click"/>
+       </Grid>
 </Page>

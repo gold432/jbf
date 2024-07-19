@@ -18,7 +18,7 @@ namespace FitnessTracker
             if (int.TryParse(goalTextBox.Text, out int goal))
             {
                 _model.SetGoal(goal);
-                activityFrame.Navigate(new MetricEntry(_model));
+                ((MainWindow)Application.Current.MainWindow).GoToPage(new MetricEntry(_model));
             }
             else
             {

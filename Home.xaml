@@ -1,7 +1,7 @@
-<Page x:Class="FitnessTracker.GoalSettingPage"
+<Page x:Class="FitnessTracker.Home"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      Title="Goal Setting">
+      Title="Login">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -9,10 +9,16 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Label Content="Set your fitness goal (calories to burn):" Grid.Column="0" Grid.Row="0" Margin="5"/>
-        <TextBox x:Name="goalTextBox" Grid.Column="0" Grid.Row="1" Margin="5"/>
-        <Button Content="Set Goal" Grid.Column="0" Grid.Row="2" Margin="5" Click="SetGoalButton_Click"/>
+        <!-- <Button Content="Register"
+                Grid.Column="1"
+                Grid.Row="2"
+                Margin="5"
+                Click="Register_Click"/> -->
+        <Button Content="Login"
+                Grid.Column="1"
+                Grid.Row="2"
+                Margin="5"
+                Click="Login_Click"/>
     </Grid>
 </Page>

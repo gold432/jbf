@@ -47,8 +47,6 @@ namespace FitnessTracker
 
         private double CalculateCaloriesBurned(string activity, double metric1, double metric2, double metric3)
         {
-            // Implement a formula to calculate calories burned based on the activity and metrics
-            // For example:
             if (activity == "Walking")
             {
                 return metric1 * 0.5 + metric2 * 0.2 + metric3 * 0.3;

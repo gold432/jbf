@@ -1,40 +1,42 @@
 using System.Windows;
 using System.Windows.Controls;
-using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.IO;
 
 namespace FitnessTracker
-
 {
     public partial class MetricEntry : Page
     {
-        private dynamic metrics;
+        private readonly FitnessTrackerModel _model;
 
         public MetricEntry(FitnessTrackerModel model)
         {
             InitializeComponent();
+            _model = model;
+        }
 
-            // // Load metrics from Metrics.json
-            // string json = File.ReadAllText("Metrics.json");
-            // metrics = JsonConvert.DeserializeObject<dynamic>(json);
-
-            // // Populate combo box with metric keys
-            // foreach (string key in metrics.Keys)
-            // {
-            //    _metricComboBox.Items.Add(key);
-            // }
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            ShowSelectedPanel("Walking");
         }
 
         private void cmbExercise_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string selectedExercise = (cmbExercise.SelectedItem as ComboBoxItem).Content.ToString();
+            if (cmbExercise.SelectedItem is ComboBoxItem selectedItem)
+            {
+                string selectedExercise = selectedItem.Content.ToString();
+                ShowSelectedPanel(selectedExercise);
+            }
+        }
 
+        private void ShowSelectedPanel(string exercise)
+        {
             walkingPanel.Visibility = Visibility.Collapsed;
             swimmingPanel.Visibility = Visibility.Collapsed;
-            squatsPanel.Visibility = Visibility.Collapsed;
+            runningPanel.Visibility = Visibility.Collapsed;
+            sitUpsPanel.Visibility = Visibility.Collapsed;
+            jumpingJacksPanel.Visibility = Visibility.Collapsed;
+            pressUpsPanel.Visibility = Visibility.Collapsed;
 
-            switch (selectedExercise)
+            switch (exercise)
             {
                 case "Walking":
                     walkingPanel.Visibility = Visibility.Visible;
@@ -42,19 +44,24 @@ namespace FitnessTracker
                 case "Swimming":
                     swimmingPanel.Visibility = Visibility.Visible;
                     break;
-                case "Squats":
-                    squatsPanel.Visibility = Visibility.Visible;
+                case "Running":
+                    runningPanel.Visibility = Visibility.Visible;
                     break;
-                default:
+                case "Sit-Ups":
+                    sitUpsPanel.Visibility = Visibility.Visible;
+                    break;
+                case "Jumping-Jacks":
+                    jumpingJacksPanel.Visibility = Visibility.Visible;
+                    break;
+                case "Press-Ups":
+                    pressUpsPanel.Visibility = Visibility.Visible;
                     break;
             }
         }
 
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
-            // Navigate to Progress.xaml page
-            Progress<int> progressPage = new Progress<int>();
-            this.NavigationService.Navigate(progressPage);
+            ((MainWindow)Application.Current.MainWindow).GoToPage(new ProgressPage(_model));
         }
     }
 }

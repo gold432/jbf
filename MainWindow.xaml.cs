@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Navigation;
+using System.Diagnostics;
 
 namespace FitnessTracker
 {
@@ -11,17 +13,19 @@ namespace FitnessTracker
         {
             InitializeComponent();
             _model = new FitnessTrackerModel();
+            mainFrame.Navigate(new Home(_model));
         }
-
-        private void Register_Click(object sender, RoutedEventArgs e)
+        public void GoToPage(Page page)
         {
-                mainFrame.Navigate(new Login(_model));
-        }
-
-        private void Login_Click(object sender, RoutedEventArgs e)
-        {
-            mainFrame.Navigate(new Login(_model));
-
+            try
+            {
+                this.Content = page;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Navigation error: {ex.Message}");
+                Debug.WriteLine($"Navigation exception details: {ex}");
+            }
         }
     }
 
