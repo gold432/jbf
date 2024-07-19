@@ -9,6 +9,7 @@ namespace FitnessTracker
         private Dictionary<string, double> _activities;
         int failedAttempts = 0;
         private double _goal;
+        public int i = 0;
         private double _totalCaloriesBurned;
 
         public FitnessTrackerModel()
@@ -26,29 +27,31 @@ namespace FitnessTracker
             string jsonString = File.ReadAllText("users.json");
             Dictionary<string, User> users = JsonSerializer.Deserialize<Dictionary<string, User>>(jsonString);
 
-            for (int i = 0; i < 3; i++)
+            if (users.TryGetValue(username, out User user))
             {
-                if (users.TryGetValue(username, out User user))
+                if (user.Password == password)
                 {
-                    if (user.Password == password)
-                    {
-                        ((MainWindow)Application.Current.MainWindow).GoToPage(new GoalSettingPage(model));
-                    }
-                    else
-                    {
-
-                        MessageBox.Show("Wrong password.");
-                    }
-
+                    ((MainWindow)Application.Current.MainWindow).GoToPage(new GoalSettingPage(model));
                 }
                 else
                 {
-                    MessageBox.Show("That user does not exist");
+
+                    MessageBox.Show("Wrong password.");
+                    i++;
+                    if (i == 3)
+                    {
+                        MessageBox.Show("You have exceeded the maximum number of login attempts");
+                        return false;
+                    }
                 }
+
+            }
+            else
+            {
+                MessageBox.Show("That user does not exist");
             }
 
-            MessageBox.Show("You have exceeded the maximum number of login attempts");
-            return false;
+
         }
 
         public bool Register(string username, string password, FitnessTrackerModel model)
