@@ -1,6 +1,5 @@
 using System.Windows;
 using System.Windows.Controls;
-
 namespace FitnessTracker
 {
     public partial class MetricEntry : Page
@@ -17,7 +16,6 @@ namespace FitnessTracker
         {
             ShowSelectedPanel("Walking");
         }
-
         private void cmbExercise_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cmbExercise.SelectedItem is ComboBoxItem selectedItem)
@@ -35,7 +33,6 @@ namespace FitnessTracker
             sitUpsPanel.Visibility = Visibility.Collapsed;
             jumpingJacksPanel.Visibility = Visibility.Collapsed;
             pressUpsPanel.Visibility = Visibility.Collapsed;
-
             switch (e)
             {
                 case "Walking":
@@ -58,13 +55,11 @@ namespace FitnessTracker
                     break;
             }
         }
-
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
             string metric1;
             string metric2;
             string metric3;
-
             switch (selectedExercise)
             {
                 case "Walking":
@@ -84,18 +79,18 @@ namespace FitnessTracker
                     break;
                 case "Sit-Ups":
                     metric1 = sitUpsTime.Text;
-                    metric2 = sitUpsCount.Text; // assuming this is the correct field
-                    metric3 = sitUpsCount.Text; // assuming this is the correct field
+                    metric2 = sitUpsCount.Text; 
+                    metric3 = sitUpsCount.Text; 
                     break;
                 case "Jumping-Jacks":
-                    metric1 = jumpingJacksCount.Text; // assuming this is the correct field
-                    metric2 = jumpingJacksCount.Text; // assuming this is the correct field
-                    metric3 = jumpingJacksCount.Text; // assuming this is the correct field
+                    metric1 = jumpingJacksCount.Text; 
+                    metric2 = jumpingJacksCount.Text; 
+                    metric3 = jumpingJacksCount.Text; 
                     break;
                 case "Press-Ups":
-                    metric1 = pressUpsCount.Text; // assuming this is the correct field
-                    metric2 = pressUpsCount.Text; // assuming this is the correct field
-                    metric3 = pressUpsCount.Text; // assuming this is the correct field
+                    metric1 = pressUpsCount.Text; 
+                    metric2 = pressUpsCount.Text; 
+                    metric3 = pressUpsCount.Text; 
                     break;
             }
 
