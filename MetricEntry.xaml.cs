@@ -6,7 +6,7 @@ namespace FitnessTracker
     public partial class MetricEntry : Page
     {
         private readonly FitnessTrackerModel _model;
-        string selectedExercise = selectedItem.Content.ToString();
+        string selectedExercise = cmbExercise.selectedItem.Content.ToString();
 
         public MetricEntry(FitnessTrackerModel model)
         {
