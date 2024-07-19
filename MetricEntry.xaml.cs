@@ -103,7 +103,7 @@ namespace FitnessTracker
             double m2;
             double m3;
 
-            if (double.TryParse(m1TextBox.Text, out double result))
+            if (double.TryParse(m1TextBox.Text, out double m1r))
             {
                 m1 = result;
             }
@@ -112,7 +112,7 @@ namespace FitnessTracker
                 MessageBox.Show("The first metric is not, but must be, a number");
             }
 
-            if (double.TryParse(m2TextBox.Text, out double result))
+            if (double.TryParse(m2TextBox.Text, out double m2r))
             {
                 m2 = result;
             }
@@ -121,7 +121,7 @@ namespace FitnessTracker
                 MessageBox.Show("The second metric is not, but must be, a number");
             }
 
-            if (double.TryParse(m3TextBox.Text, out double result))
+            if (double.TryParse(m3TextBox.Text, out double m3r))
             {
                 m3 = result;
             }
