@@ -16,7 +16,7 @@ namespace FitnessTracker
 
         private void Register_Click(object sender, RoutedEventArgs e)
         {
-            ((MainWindow)Application.Current.MainWindow).GoToPage(new Login(_model));
+            ((MainWindow)Application.Current.MainWindow).GoToPage(new Register(_model));
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)

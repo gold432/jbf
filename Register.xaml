@@ -1,0 +1,22 @@
+<Page x:Class="FitnessTracker.Register"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Register">
+     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Username:" Grid.Column="0" Grid.Row="0" Margin="5"/>
+        <TextBox x:Name="usernameTextBox" Grid.Column="1" Grid.Row="0" Margin="5"/>
+        <Label Content="Password:" Grid.Column="0" Grid.Row="1" Margin="5"/>
+        <PasswordBox x:Name="passwordBox" Grid.Column="1" Grid.Row="1" Margin="5"/>
+        <Button Content="Register" Grid.Column="1" Grid.Row="2" Margin="5" Click="RegisterButton_Click"/>
+    </Grid>
+</Page>

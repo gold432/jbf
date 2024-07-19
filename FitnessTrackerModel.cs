@@ -1,10 +1,13 @@
-using System.Collections.Generic;
-
+using System.IO;
+using System.Text.Json;
+using System.Windows;
+using System.Windows.Controls;
 namespace FitnessTracker
 {
     public class FitnessTrackerModel
     {
         private Dictionary<string, double> _activities;
+        int failedAttempts = 0;
         private double _goal;
         private double _totalCaloriesBurned;
 
@@ -13,9 +16,73 @@ namespace FitnessTracker
             _activities = new Dictionary<string, double>();
         }
 
-        public bool Login(string username, string password)
+        public class User
         {
-            // Implement login logic here
+            public required string Password { get; set; }
+        }
+
+        public bool Login(string username, string password, FitnessTrackerModel model)
+        {
+            string jsonString = File.ReadAllText("users.json");
+            Dictionary<string, User> users = JsonSerializer.Deserialize<Dictionary<string, User>>(jsonString);
+
+            for (int i = 0; i < 3; i++)
+            {
+                if (users.TryGetValue(username, out User user))
+                {
+                    if (user.Password == password)
+                    {
+                        ((MainWindow)Application.Current.MainWindow).GoToPage(new GoalSettingPage(model));
+                    }
+                    else
+                    {
+
+                        MessageBox.Show("Wrong password.");
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("That user does not exist");
+                }
+            }
+
+            MessageBox.Show("You have exceeded the maximum number of login attempts");
+            return false;
+        }
+
+        public bool Register(string username, string password, FitnessTrackerModel model)
+        {
+            if (password.Length < 12)
+            {
+                MessageBox.Show("Password is less than 12 characters.");
+                return false;
+            }
+            bool hasLowercase = password.Any(c => char.IsLower(c));
+            bool hasUppercase = password.Any(c => char.IsUpper(c));
+
+            if (!hasLowercase)
+            {
+                MessageBox.Show("The password is required to have a lower-case character.");
+                return false;
+            }
+            if (!hasUppercase)
+            {
+                MessageBox.Show("The password is required to have an upper-case character.");
+                return false;
+            }
+
+            string jsonString = File.ReadAllText("users.json");
+            Dictionary<string, User> users = JsonSerializer.Deserialize<Dictionary<string, User>>(jsonString) ?? new Dictionary<string, User>();
+
+            // Add a new user
+            users.Add(username, new User { Password = password });
+
+            // Write the updated users back to the file
+            string newJson = JsonSerializer.Serialize(users, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText("users.json", newJson);
+            ((MainWindow)Application.Current.MainWindow).GoToPage(new GoalSettingPage(model));
+
             return true;
         }
 

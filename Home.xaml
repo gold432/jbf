@@ -8,16 +8,18 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <!-- Change to * or set a specific height -->
             <RowDefinition Height="Auto"/>
+            <!-- Change to * or set a specific height -->
         </Grid.RowDefinitions>
-        <!-- <Button Content="Register"
-                Grid.Column="1"
-                Grid.Row="2"
+        <Button Content="Register"
+                Grid.Column="0"
+                Grid.Row="0"
                 Margin="5"
-                Click="Register_Click"/> -->
+                Click="Register_Click"/>
         <Button Content="Login"
-                Grid.Column="1"
-                Grid.Row="2"
+                Grid.Column="0"
+                Grid.Row="1"
                 Margin="5"
                 Click="Login_Click"/>
     </Grid>
