@@ -61,45 +61,55 @@ namespace FitnessTracker
 
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
-            string metric1;
-            string metric2;
-            string metric3;
+            TextBox m1TextBox;
+            TextBox m2TextBox;
+            TextBox m3TextBox;
 
-            switch (e)
+            switch (selectedExercise)
             {
                 case "Walking":
-                    metric1 = walkingSteps.Text;
-                    metric2 = walkingDistance.Text;
-                    metric3 = walkingMinutes.Text;
+                    m1TextBox = walkingSteps;
+                    m2TextBox = walkingDistance;
+                    m3TextBox = walkingMinutes;
                     break;
                 case "Swimming":
-                    metric1 = swimmingLaps.Text;
-                    metric2 = swimmingMinutes.Text;
-                    metric3 = swimmingAvgHR.Text;
+                    m1TextBox = swimmingLaps;
+                    m2TextBox = swimmingMinutes;
+                    m3TextBox = swimmingAvgHR;
                     break;
                 case "Running":
-                    metric1 = runningDistance.Text;
-                    metric2 = runningSpeed.Text;
-                    metric3 = runningMinutes.Text;
+                    m1TextBox = runningDistance;
+                    m2TextBox = runningSpeed;
+                    m3TextBox = runningMinutes;
                     break;
                 case "Sit-Ups":
-                    metric1 = sitUpsTime.Text;
-                    metric2 = walkingSteps.Text;
-                    metric3 = walkingSteps.Text;
+                    m1TextBox = sitUpsTime;
+                    m2TextBox = walkingSteps;
+                    m3TextBox = walkingSteps;
                     break;
                 case "Jumping-Jacks":
-                    metric1 = walkingSteps.Text;
-                    metric2 = walkingSteps.Text;
-                    metric3 = walkingSteps.Text;
+                    m1TextBox = walkingSteps;
+                    m2TextBox = walkingSteps;
+                    m3TextBox = walkingSteps;
                     break;
                 case "Press-Ups":
-                    metric1 = walkingSteps.Text;
-                    metric2 = walkingSteps.Text;
-                    metric3 = walkingSteps.Text;
+                    m1TextBox = walkingSteps;
+                    m2TextBox = walkingSteps;
+                    m3TextBox = walkingSteps;
                     break;
             }
 
-            _model.RecordActivity(exercise); //TODO
+            double m1
+            double m2
+            double m3
+
+            if (double.TryParse(m1TextBox.Text, out double result)) {
+                m1 = result
+            } else {
+                MessageBox.Show
+            }
+
+            _model.RecordActivity(selectedExercise, m1TextBox, m2TextBox, m3TextBox); //TODO
             ((MainWindow)Application.Current.MainWindow).GoToPage(new ProgressPage(_model));
         }
     }
