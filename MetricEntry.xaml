@@ -42,8 +42,8 @@
                                    <TextBox x:Name="walkingDistance"
                                             Margin="0,0,0,10"/>
                                    <Label Content="Time taken"
-                                          Target="{Binding ElementName=walkingTime}"/>
-                                   <TextBox x:Name="walkingTime"
+                                          Target="{Binding ElementName=walkingMinutes}"/>
+                                   <TextBox x:Name="walkingMinutes"
                                             Margin="0,0,0,10"/>
                             </StackPanel>
 
@@ -54,8 +54,8 @@
                                    <TextBox x:Name="swimmingLaps"
                                             Margin="0,0,0,10"/>
                                    <Label Content="Time taken"
-                                          Target="{Binding ElementName=swimmingTime}"/>
-                                   <TextBox x:Name="swimmingTime"
+                                          Target="{Binding ElementName=swimmingMinutes}"/>
+                                   <TextBox x:Name="swimmingMinutes"
                                             Margin="0,0,0,10"/>
                                    <Label Content="Average Heart Rate"
                                           Target="{Binding ElementName=swimmingAvgHR}"/>
@@ -74,8 +74,8 @@
                                    <TextBox x:Name="runningSpeed"
                                             Margin="0,0,0,10"/>
                                    <Label Content="Calories"
-                                          Target="{Binding ElementName=runningCalories}"/>
-                                   <TextBox x:Name="runningCalories"
+                                          Target="{Binding ElementName=runningMinutes}"/>
+                                   <TextBox x:Name="runningMinutes"
                                             Margin="0,0,0,10"/>
                             </StackPanel>
 
@@ -86,8 +86,12 @@
                                    <TextBox x:Name="sitUpsTime"
                                             Margin="0,0,0,10"/>
                                    <Label Content="Sit-Ups"
-                                          Target="{Binding ElementName=sitUpsCount}"/>
-                                   <TextBox x:Name="sitUpsCount"
+                                          Target="{Binding ElementName=sitUpsReps}"/>
+                                   <TextBox x:Name="sitUpReps"
+                                            Margin="0,0,0,10"/>
+                                   <Label Content="Sit-Ups"
+                                          Target="{Binding ElementName=SitUpCountPerRep}"/>
+                                   <TextBox x:Name="SitUpCountPerRep"
                                             Margin="0,0,0,10"/>
                             </StackPanel>
 

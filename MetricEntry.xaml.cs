@@ -6,6 +6,7 @@ namespace FitnessTracker
     public partial class MetricEntry : Page
     {
         private readonly FitnessTrackerModel _model;
+        string selectedExercise = selectedItem.Content.ToString();
 
         public MetricEntry(FitnessTrackerModel model)
         {
@@ -22,12 +23,11 @@ namespace FitnessTracker
         {
             if (cmbExercise.SelectedItem is ComboBoxItem selectedItem)
             {
-                string selectedExercise = selectedItem.Content.ToString();
                 ShowSelectedPanel(selectedExercise);
             }
         }
 
-        private void ShowSelectedPanel(string exercise)
+        private void ShowSelectedPanel(string e)
         {
             walkingPanel.Visibility = Visibility.Collapsed;
             swimmingPanel.Visibility = Visibility.Collapsed;
@@ -36,7 +36,7 @@ namespace FitnessTracker
             jumpingJacksPanel.Visibility = Visibility.Collapsed;
             pressUpsPanel.Visibility = Visibility.Collapsed;
 
-            switch (exercise)
+            switch (e)
             {
                 case "Walking":
                     walkingPanel.Visibility = Visibility.Visible;
@@ -61,6 +61,39 @@ namespace FitnessTracker
 
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
+            string metric1
+            string metric2
+            string metric3
+
+            switch (e)
+            {
+                case "Walking":
+                    metric1 = walkingSteps.Text
+                    metric2 = walkingDistance.Text
+                    metric3 = walkingMinutes.Text
+                case "Swimming":
+                    metric1 = swimmingLaps.Text
+                    metric2 = swimmingMinutes.Text
+                    metric3 = swimmingAvgHR.Text
+                case "Running":
+                    metric1 = runningDistance.Text
+                    metric2 = runningSpeed.Text
+                    metric3 = runningMinutes.Text
+                case "Sit-Ups":
+                    metric1 = sitUpsTime.Text
+                    metric2 = walkingSteps.Text
+                    metric3 = walkingSteps.Text
+                case "Jumping-Jacks":
+                    metric1 = walkingSteps.Text
+                    metric2 = walkingSteps.Text
+                    metric3 = walkingSteps.Text
+                case "Press-Ups":
+                    metric1 = walkingSteps.Text
+                    metric2 = walkingSteps.Text
+                    metric3 = walkingSteps.Text
+            }
+
+            _model.RecordActivity(exercise) //TODO
             ((MainWindow)Application.Current.MainWindow).GoToPage(new ProgressPage(_model));
         }
     }
