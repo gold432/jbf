@@ -6,7 +6,6 @@ namespace FitnessTracker
     public partial class MetricEntry : Page
     {
         private readonly FitnessTrackerModel _model;
-        string selectedExercise = cmbExercise.selectedItem.Content.ToString();
 
         public MetricEntry(FitnessTrackerModel model)
         {
@@ -23,6 +22,7 @@ namespace FitnessTracker
         {
             if (cmbExercise.SelectedItem is ComboBoxItem selectedItem)
             {
+                string selectedExercise = selectedItem.Content.ToString();
                 ShowSelectedPanel(selectedExercise);
             }
         }
@@ -61,77 +61,82 @@ namespace FitnessTracker
 
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
-            TextBox m1TextBox;
-            TextBox m2TextBox;
-            TextBox m3TextBox;
+            if (cmbExercise.SelectedItem is ComboBoxItem selectedItem)
+            {
+                string selectedExercise = selectedItem.Content.ToString();
 
-            switch (selectedExercise)
-            {
-                case "Walking":
-                    m1TextBox = walkingSteps;
-                    m2TextBox = walkingDistance;
-                    m3TextBox = walkingMinutes;
-                    break;
-                case "Swimming":
-                    m1TextBox = swimmingLaps;
-                    m2TextBox = swimmingMinutes;
-                    m3TextBox = swimmingAvgHR;
-                    break;
-                case "Running":
-                    m1TextBox = runningDistance;
-                    m2TextBox = runningSpeed;
-                    m3TextBox = runningMinutes;
-                    break;
-                case "Sit-Ups":
-                    m1TextBox = sitUpsTime;
-                    m2TextBox = walkingSteps;
-                    m3TextBox = walkingSteps;
-                    break;
-                case "Jumping-Jacks":
-                    m1TextBox = walkingSteps;
-                    m2TextBox = walkingSteps;
-                    m3TextBox = walkingSteps;
-                    break;
-                case "Press-Ups":
-                    m1TextBox = walkingSteps;
-                    m2TextBox = walkingSteps;
-                    m3TextBox = walkingSteps;
-                    break;
-            }
+                TextBox m1TextBox = walkingSteps;
+                TextBox m2TextBox = walkingDistance;
+                TextBox m3TextBox = walkingMinutes;
 
-            double m1;
-            double m2;
-            double m3;
+                switch (selectedExercise)
+                {
+                    case "Walking":
+                        m1TextBox = walkingSteps;
+                        m2TextBox = walkingDistance;
+                        m3TextBox = walkingMinutes;
+                        break;
+                    case "Swimming":
+                        m1TextBox = swimmingLaps;
+                        m2TextBox = swimmingMinutes;
+                        m3TextBox = swimmingAvgHR;
+                        break;
+                    case "Running":
+                        m1TextBox = runningDistance;
+                        m2TextBox = runningSpeed;
+                        m3TextBox = runningMinutes;
+                        break;
+                    case "Sit-Ups":
+                        m1TextBox = sitUpsTime;
+                        m2TextBox = walkingSteps;
+                        m3TextBox = walkingSteps;
+                        break;
+                    case "Jumping-Jacks":
+                        m1TextBox = walkingSteps;
+                        m2TextBox = walkingSteps;
+                        m3TextBox = walkingSteps;
+                        break;
+                    case "Press-Ups":
+                        m1TextBox = walkingSteps;
+                        m2TextBox = walkingSteps;
+                        m3TextBox = walkingSteps;
+                        break;
+                }
 
-            if (double.TryParse(m1TextBox.Text, out double m1r))
-            {
-                m1 = result;
-            }
-            else
-            {
-                MessageBox.Show("The first metric is not, but must be, a number");
-            }
+                double m1 = 0;
+                double m2 = 0;
+                double m3 = 0;
 
-            if (double.TryParse(m2TextBox.Text, out double m2r))
-            {
-                m2 = result;
-            }
-            else
-            {
-                MessageBox.Show("The second metric is not, but must be, a number");
-            }
+                if (double.TryParse(m1TextBox.Text, out double m1r))
+                {
+                    m1 = m1r;
+                }
+                else
+                {
+                    MessageBox.Show("The first metric is not, but must be, a number");
+                }
 
-            if (double.TryParse(m3TextBox.Text, out double m3r))
-            {
-                m3 = result;
-            }
-            else
-            {
-                MessageBox.Show("The third metric is not, but must be, a number");
-            }
+                if (double.TryParse(m2TextBox.Text, out double m2r))
+                {
+                    m2 = m2r;
+                }
+                else
+                {
+                    MessageBox.Show("The second metric is not, but must be, a number");
+                }
 
-            _model.RecordActivity(selectedExercise, m1TextBox, m2TextBox, m3TextBox); //TODO
-            ((MainWindow)Application.Current.MainWindow).GoToPage(new ProgressPage(_model));
+                if (double.TryParse(m3TextBox.Text, out double m3r))
+                {
+                    m3 = m3r;
+                }
+                else
+                {
+                    MessageBox.Show("The third metric is not, but must be, a number");
+                }
+
+                _model.RecordActivity(selectedExercise, m1, m2, m3);
+                ((MainWindow)Application.Current.MainWindow).GoToPage(new ProgressPage(_model));
+            }
         }
     }
 }
