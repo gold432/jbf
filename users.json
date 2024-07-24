@@ -1,8 +1,22 @@
 {
   "ed": {
-    "Password": "lollsfsldfsdf#####EE"
+    "Password": "lollsfsldfsdf#####EE",
+    "Activities": null
   },
   "eddie": {
-    "Password": "Iiiiiiiiiiiiiiiiii"
+    "Password": "Iiiiiiiiiiiiiiiiii",
+    "Activities": null
+  },
+  "d": {
+    "Password": "iIIIIIIIIIIIIIIII",
+    "Activities": null
+  },
+  "charles": {
+    "Password": "fdQ111111111",
+    "Activities": null
+  },
+  "sdk": {
+    "Password": "1111111111111111qQ",
+    "Activities": null
   }
 }

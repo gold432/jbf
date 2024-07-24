@@ -1,3 +1,7 @@
 
-JSON file storing users and their activities
-add new activity button
+user adds activity
+activity write to user.activities
+calculate calories burned
+    int calories_burned
+    for each activity
+        calories += _calcalburned(activity)

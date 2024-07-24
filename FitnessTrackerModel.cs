@@ -20,6 +20,27 @@ namespace FitnessTracker
         public class User
         {
             public required string Password { get; set; }
+            public List<Activity>? Activities { get; set; }
+        }
+
+        public class Activity
+        {
+            public string Name { get; set; }
+            public int M1 { get; set; }
+            public int M2 { get; set; }
+            public int M3 { get; set; }
+
+            public Activity(string name, int m1, int m2, int m3) {
+                Name = name;
+                M1 = m1;
+                M2 = m2;
+                M3 = m3;
+            }
+        }
+
+        public class Metric {
+            public string Name { get; set; }
+            public string Value { get; set; }
         }
 
         public bool Login(string username, string password, FitnessTrackerModel model)
@@ -32,6 +53,7 @@ namespace FitnessTracker
                 if (user.Password == password)
                 {
                     ((MainWindow)Application.Current.MainWindow).GoToPage(new GoalSettingPage(model));
+                    return true;
                 }
                 else
                 {
@@ -41,7 +63,12 @@ namespace FitnessTracker
                     if (i == 3)
                     {
                         MessageBox.Show("You have exceeded the maximum number of login attempts");
+                        Environment.Exit(0);
                         return false;
+                    }
+                    else
+                    {
+                        return true;
                     }
                 }
 
@@ -49,6 +76,7 @@ namespace FitnessTracker
             else
             {
                 MessageBox.Show("That user does not exist");
+                return false;
             }
 
 
@@ -75,8 +103,7 @@ namespace FitnessTracker
                 return false;
             }
 
-            string jsonString = File.ReadAllText("users.json");
-            Dictionary<string, User> users = JsonSerializer.Deserialize<Dictionary<string, User>>(jsonString) ?? new Dictionary<string, User>();
+            Dictionary<string, User> users = GetUsers();
 
             // Add a new user
             users.Add(username, new User { Password = password });
@@ -98,6 +125,25 @@ namespace FitnessTracker
         {
             _activities[activity] = CalculateCaloriesBurned(activity, metric1, metric2, metric3);
             AddCaloriesBurned(_activities[activity]);
+        }
+
+        public double CalculateTotalCaloriesBurned()
+        {
+            double calories_burned = 0;
+            Dictionary<string, User> users = GetUsers();
+            foreach (KeyValuePair<string, User> user in users) {
+                foreach (Activity activity in user.Value.Activities) {
+                    calories_burned += CalculateCaloriesBurned(activity.Name, activity.M1, activity.M2, activity.M3);
+                }
+            }
+            return calories_burned;
+        }
+
+        public Dictionary<string, User> GetUsers()
+        {
+            string jsonString = File.ReadAllText("users.json");
+            Dictionary<string, User> users = JsonSerializer.Deserialize<Dictionary<string, User>>(jsonString) ?? new Dictionary<string, User>();
+            return users;
         }
 
         public double GetTotalCaloriesBurned()
